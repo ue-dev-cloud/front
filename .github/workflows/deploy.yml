@@ -1,0 +1,52 @@
+name: deploy front app
+
+env:
+  SERVICE_NAME: ${{ vars.SERVICE_NAME }}
+  PROJECT_ID: ${{ vars.PROJECT_ID }}
+  REGION: ${{ vars.REGION }}
+  IMAGE_REPOSITORY: ${{ vars.IMAGE_REPOSITORY }}
+  IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+  IMAGE_TAG: $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_REPOSITORY/$IMAGE_NAME:${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: "latest"
+
+      - name: Set Google Cloud Project
+        run: gcloud config set project $PROJECT_ID
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker $REGION-docker.pkg.dev
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build --file Dockerfile -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE_NAME \
+            --image $IMAGE_TAG \
+            --port 80 \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated

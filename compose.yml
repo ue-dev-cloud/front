@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      target: local
+      dockerfile: Dockerfile
+    container_name: app_local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app
