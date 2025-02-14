@@ -8,13 +8,16 @@ CMD ["npm", "run", "start"]
 
 FROM basebuild AS builder
 
+COPY app/public ./public
+COPY app/src ./src
 COPY app/package*.json ./
+
+RUN npm install
+RUN npm install -g serve
 
 RUN npm run build
 
 COPY app/build ./build
-
-RUN npm run build
 
 FROM basebuild AS prod
 
