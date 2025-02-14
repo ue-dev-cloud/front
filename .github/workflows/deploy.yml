@@ -4,9 +4,7 @@ env:
   SERVICE_NAME: ${{ vars.SERVICE_NAME }}
   PROJECT_ID: ${{ vars.PROJECT_ID }}
   REGION: ${{ vars.REGION }}
-  IMAGE_REPOSITORY: ${{ vars.IMAGE_REPOSITORY }}
-  IMAGE_NAME: ${{ vars.IMAGE_NAME }}
-  IMAGE_TAG: $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_REPOSITORY/$IMAGE_NAME:${{ github.ref_name }}
+  IMAGE_TAG: ${{ vars.REGION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.IMAGE_REPOSITORY }}/${{ vars.IMAGE_NAME }}:${{ github.ref_name }}
 
 on:
   push:
@@ -39,7 +37,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build --file Dockerfile -t $IMAGE_TAG .
+          docker build --file Dockerfile --target prod -t $IMAGE_TAG .
           docker push $IMAGE_TAG
 
       - name: Deploy to Cloud Run
