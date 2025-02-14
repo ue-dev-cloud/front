@@ -17,8 +17,6 @@ RUN npm install -g serve
 
 RUN npm run build
 
-COPY app/build ./build
-
 FROM basebuild AS prod
 
 COPY --from=builder /app/build ./build
