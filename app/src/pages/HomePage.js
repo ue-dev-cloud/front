@@ -30,7 +30,7 @@ function HomePage() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://europe-west9-ue-dev-cloud.cloudfunctions.net/quarkus-api",
+        "https://europe-west9-ue-dev-cloud.cloudfunctions.net/quarkus-api/publish",
         {
           method: "POST",
           headers: {

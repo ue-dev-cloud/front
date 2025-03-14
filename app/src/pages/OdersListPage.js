@@ -12,7 +12,7 @@ function OdersListPage() {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        "https://europe-west9-ue-dev-cloud.cloudfunctions.net/quarkus-api"
+        "https://europe-west9-ue-dev-cloud.cloudfunctions.net/quarkus-api/orders"
       );
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des commandes");
