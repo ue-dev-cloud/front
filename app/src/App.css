@@ -2,20 +2,42 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+nav {
+  background-color: #282828;
+  padding: 1rem;
+  margin-bottom: 6rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+nav a:hover {
+  background-color: #404756;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #282828;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,15 +46,102 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.order-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.order-form div {
+  margin-bottom: 15px;
+}
+
+.order-form label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.order-form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.order-form button {
+  background-color: #282828;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.order-form button:hover {
+  background-color: #404756;
+}
+
+.product-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.product-select:hover {
+  border-color: #999;
+}
+
+.product-select:focus {
+  outline: none;
+  border-color: #282828;
+  box-shadow: 0 0 0 2px rgba(40, 44, 52, 0.1);
+}
+
+.table-container {
+  margin: 20px auto;
+  padding: 0 20px;
+  max-width: 1200px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #282828;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
 }
